@@ -1,8 +1,6 @@
 ##########################################################################################################
 
-## Coursera Getting and Cleaning Data Course Project
-## Heather Wade
-## 2014-04-27
+## Coursera Getting and Cleaning Data - Course Project
 
 # runAnalysis.r File Description:
 
@@ -17,8 +15,6 @@
 ##########################################################################################################
 
 
-# Clean up workspace
-rm(list=ls())
 
 # 1. Merge the training and the test sets to create one data set.
 
@@ -32,13 +28,13 @@ subjectTrain = read.table('./train/subject_train.txt',header=FALSE); #imports su
 xTrain       = read.table('./train/x_train.txt',header=FALSE); #imports x_train.txt
 yTrain       = read.table('./train/y_train.txt',header=FALSE); #imports y_train.txt
 
-# Assigin column names to the data imported above
+# Assigning column names to the data imported above
 colnames(activityType)  = c('activityId','activityType');
 colnames(subjectTrain)  = "subjectId";
 colnames(xTrain)        = features[,2]; 
 colnames(yTrain)        = "activityId";
 
-# cCreate the final training set by merging yTrain, subjectTrain, and xTrain
+# Create the final training set by merging yTrain, subjectTrain, and xTrain
 trainingData = cbind(yTrain,subjectTrain,xTrain);
 
 # Read in the test data
@@ -112,5 +108,5 @@ tidyData    = aggregate(finalDataNoActivityType[,names(finalDataNoActivityType) 
 # Merging the tidyData with activityType to include descriptive acitvity names
 tidyData    = merge(tidyData,activityType,by='activityId',all.x=TRUE);
 
-# Export the tidyData set 
+# Create the tidyData set 
 write.table(tidyData, './tidyData.txt',row.names=TRUE,sep='\t');
